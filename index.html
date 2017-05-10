@@ -3,19 +3,73 @@
     <head>
         <title>N Chancellors Problem</title>
         <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
         <link rel="stylesheet" type="text/css" href="styles/style.css">
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css"
+            integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.css" 
+            integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+                crossorigin="anonymous"></script>
+        <link href="styles/simple-sidebar.css" rel="stylesheet">
     </head>
     <body>
-        <div id="centerDiv">
-        	<div id="puzzles"></div>
-        	<div id="board"></div>
-        	<div id="solutions"></div>
+
+        <div id="wrapper" class="toggled">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Start Bootstrap
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Puzzles<i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="demo" class="collapse">
+                        <li>
+                            <a href="#">Create Puzzle</a>
+                        </li>
+                        <li>
+                            <a href="">Input File</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="">Solutions</a>
+                </li>
+            </ul>
         </div>
-        <div id="fen"></div>
-        
-        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        Content goes here
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
         <script type="text/javascript" src="js/three.min.js"></script>
-        <!--script type="text/javascript" src="js/orbitControls.js"></script-->
         <script type="text/javascript" src="js/chessboard3.js"></script>
         <script type="text/javascript" src="js/nChans.js"></script>
     </body>
