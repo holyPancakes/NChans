@@ -1,0 +1,34 @@
+#centerDiv {
+	width: 1250px;
+	height: 600px;
+	background: rgb(200,200,200);
+	margin: auto;
+}
+
+#puzzles {
+	width: 275px;
+	height: 600px;
+	background: rgb(186,255,201);
+	float:left;
+}
+
+#board {
+	width: 700px;
+	height: 600px;
+	background: rgb(200,200,200);
+	float:left;
+}
+
+#solutions {
+	width: 275px;
+	height: 600px;
+	background: rgb(186,255,201);
+	float:left;
+}
+
+#fen {
+	width: 1250px;
+	height: 15px;
+	background: rgb(200,200,200);
+	margin: auto;
+}
