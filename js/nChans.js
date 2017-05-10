@@ -34,7 +34,70 @@
 
 	}
 
-	function solveNChans(){
+	function fenToConfig (fen) {
+		if (!fen) {
+			alert('Invalid input');
+			return;
+		}
+
+		let config = '';
+		for (let i=0, x=0; i<fen.length; i++) {
+			switch (fen[i]) {
+				case 'K':
+					config += '1 ';
+					break;
+				case '/':
+					config += '\n';
+					break;
+				default:
+					let m = parseInt(fen[i]);
+					for (;m>0;m--) {
+						config += '0 '
+					}
+					break;
+			}
+		}
+
+		return config;
+	}
+
+	function configToFen (config) {
+		if (!config) {
+			alert('Invalid input');
+			return;
+		}
+
+		let fen = '';
+		let stack = [];
+
+		for (let i=0; i<config.length; i++) {
+			switch (config[i]) {
+				case '1':
+					if (stack.length > 0) {
+						fen += stack.length;
+						stack = [];
+					}
+					fen += 'K';
+					break;
+				case '0':
+					stack.push(0);
+					break;
+				case '\n':
+					if (stack.length > 0) fen += stack.length;
+					stack = [];
+					fen += '/';
+					break;
+				default: // whitespace
+					break;
+			}
+		}
+
+		if (stack.length > 0) fen += stack.length;
+
+		return fen;
+	}
+
+	function solveNChans (N, config, initialPlaced) {
 
 	}
 	
