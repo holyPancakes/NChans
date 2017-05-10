@@ -6,7 +6,7 @@
  * Released under MIT license
  * https://github.com/jtiscione/chessboard3js/blob/master/LICENSE
  */
-;(function() {
+(function() {
     'use strict';
 
     // ---------------------------------------------------------------------//

@@ -37,7 +37,7 @@
 	function solveNChans(){
 
 	}
-
+	
 	//test
 	var cfg = {
 		draggable: true,
