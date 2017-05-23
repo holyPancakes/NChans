@@ -23,7 +23,6 @@
             j=parseInt((candidate-1)%n+1), 
             k=parseInt((optionTOS-1)/n+1), 
             l=parseInt((optionTOS-1)%n+1);
-            console.log(getMD(i,j,k,l));
         return (getMD(i,j,k,l)!=3 && i!=k && j!=l);
     }
 
@@ -99,37 +98,39 @@
     }
 
     function solveNChans (N, config) {
-        let tempNumOfMoves = 0, n = N;
+        let numOfPuzzleMoves = 0, n = N;
+        let puzzleMoves = [];
         let candidate;
-        let puzzles = [];
         let solutions = [];
+        let nopts = [];
+        let option = [];
 
         let j = 0, i = 0;
         for (i=0;i<(n*n);i++) {
-            puzzles[i] = 0;
+            puzzleMoves[i] = 0;
         }
 
-        for (i=0,j=0;i<(n*n);i+=2,j++) {
-            let c = config[i]; console.log(c);
-            if (c == "1") puzzles[tempNumOfMoves++] = j + 1;
+        for (i=0;i<(n*n);i++) {
+            let c = config[i*2];
+            if (c == "1") {
+                puzzleMoves[numOfPuzzleMoves++] = i+1;
+            }
         }
+        console.log(puzzleMoves.toString())
 
-        let nopts = [];
+        
         for (i=0;i<(n*n);i++) {
             nopts[i] = 0;
         }
 
-        let option = [];
+        
         for (i=0;i<(n+2);i++) {
             let arr = [];
             for (j=0;j<(n+2);j++) {
                 arr[j] = 0;
             }
-
-            option.push(arr);
+            option[i]=arr;
         }
-
-        console.log(option);
 
 
         move = start = 0;
@@ -141,15 +142,14 @@
                 nopts[move]=0; //initialize new move
                 if(move == 1) {
                     for(candidate = n*n; candidate >=1; candidate --) {
-                        for(j=0;j<tempNumOfMoves;j++){
-                            if(!isSafe(candidate, puzzles[j], n)){
+                        for(j=0;j<numOfPuzzleMoves;j++){
+                            if(!isSafe(candidate, puzzleMoves[j], n)){
                                 break;
                             }
                         }
 
-                        if(!(j<tempNumOfMoves)){
-                            nopts[move]++;
-                            option[move][nopts[move]] = candidate;
+                        if(!(j<numOfPuzzleMoves) || isPuzzleMove(candidate, puzzleMoves, numOfPuzzleMoves)){
+                            option[move][++nopts[move]] = candidate;
                         }
                     }
                 }
@@ -166,13 +166,13 @@
                                     break;
 
                             if(!(i>=1)){
-                                for(j=0;j<tempNumOfMoves;j++){
-                                    if(!isSafe(candidate, puzzles[j], n)){
+                                for(j=0;j<numOfPuzzleMoves;j++){
+                                    if(!isSafe(candidate, puzzleMoves[j], n)){
                                         break;
                                     }
                                 }
 
-                                if(!(j<tempNumOfMoves)){
+                                if(!(j<numOfPuzzleMoves) || numOfPuzzleMoves==0 || isPuzzleMove(candidate, puzzleMoves, numOfPuzzleMoves)){
                                     option[move][++nopts[move]] = candidate;
                                 }
 
@@ -185,7 +185,7 @@
             }
             else {
                 //solution found when nopts[move] is 0 and move == n+1
-                if(move==n-1){
+                if(move-1==n){
                     // printf("\nSOLUTION %d:\n", ++numOfSolutions);
                     // fprintf(out, "\nSOLUTION %d:\n", numOfSolutions);
                     let k=1, l=0;
@@ -197,7 +197,7 @@
                             sol += '1 ';
                             k++;
                         }
-                        else if(i==puzzles[l]){
+                        else if(i==puzzleMoves[l]){
                             // printf("C ");
                             // fprintf(out, "1 ");
                             sol += '1 ';
@@ -215,8 +215,6 @@
                         }
                     }
                     solutions.push(sol);
-
-                    console.log(solutions.length);
                     console.log(sol);
                 }
                 
@@ -225,7 +223,7 @@
             }
         }
 
-        //return solutions;
+        return solutions;
     }
     
     //test
@@ -234,9 +232,7 @@
         dropOffBoard: 'trash',
         sparePieces: true,
         showNotation: false,
-        onChange: function(oldPos, newPos) {
-            document.getElementById("fen").innerHTML = ChessBoard3.objToFen(newPos);
-        }
+        localStorage: false
     };
     var board1 = new ChessBoard3('board', cfg);
 
