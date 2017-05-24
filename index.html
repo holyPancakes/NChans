@@ -36,15 +36,15 @@
                     <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Puzzles<i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="demo" class="collapse">
                         <li>
-                            <a href="#">Create Puzzle</a>
-                        </li>
-                        <li>
-                            <a href="#">Input File</a>
+                            <a href="">Create Puzzle</a>
                         </li>
                     </ul>
                 </li>
                 <li>
                     <a href="#">Solutions</a>
+                </li>
+                <li>
+                    <input type='file' accept='text/plain' onchange='openFile(event)'>
                 </li>
             </ul>
         </div>
@@ -57,6 +57,7 @@
                     <div class="col-lg-12">
                         <div id='board'>
                         </div>
+                        <div id='output'></div>
                     </div>
                 </div>
             </div>
@@ -67,7 +68,48 @@
     <!-- /#wrapper -->
 
         <script type="text/javascript" src="js/three.min.js"></script>
-        <script type="text/javascript" src="js/chessboard3.js"></script>zz
+        <script type="text/javascript" src="js/chessboard3.js"></script>
         <script type="text/javascript" src="js/nChans.js"></script>
+        <script>
+            function openFile (event) {
+                let input = event.target;
+
+                let puzzles = [];
+
+                let reader = new FileReader();
+                reader.onload = function () {
+                    let text = reader.result;
+                    let node = document.getElementById('output');
+
+                    let n = parseInt(text[0]);
+
+                    let rt = text.split("\n");
+                    for (let i=0, c=1; i<n; i++) { // c++ lol get it?
+
+                        puzzles[i] = {};
+                        puzzles[i].size = parseInt(rt[c][0]);
+                        let arr = [];
+                        c++;
+                        for (let j=c;arr.length<puzzles[i].size;j++) {
+                            arr.push(rt[j]);
+                        }
+                        puzzles[i].config = arr.join('\n');
+
+                        c += puzzles[i].size;
+                    }
+
+                    for (let i=0; i<puzzles.length; i++) {
+                        puzzles[i].solutions = solveNChans(puzzles[i].size, puzzles[i].config);
+                    }
+
+                    console.log(puzzles);
+
+                    node.innerText = puzzles;
+                };
+
+                reader.readAsText(input.files[0]);
+
+            };
+        </script>
     </body>
 </html>
