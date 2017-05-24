@@ -25,8 +25,8 @@
     var SPARE_POSITION = {
         //sw1 : 'wK', sw2: 'wQ', sw3: 'wR', sw4: 'wB', sw5: 'wN', sw6: 'wP',
         //sb1 : 'bK', sb2: 'bQ', sb3: 'bR', sb4: 'bB', sb5: 'bN', sb6: 'bP'
-        sw2: 'wK', sw5: 'wK',
-        sb2: 'wK', sb5: 'wK'
+        sw5: 'wK'
+        
     };
     var ASPECT_RATIO = 600/700;
     var n;
@@ -129,12 +129,15 @@
 
         // FEN should be 8 sections separated by slashes
         var chunks = fen.split('/');
-        if (chunks.length !== 8) return false;
+        if (chunks.length !== n) {
+            console.log("NOT EIGHT:"+chunks.length+"vs"+n+"  FEN:"+fen);
+            return false;
 
+        }
         // check the piece sections
-        for (var i = 0; i < 8; i++) {
+        for (var i = 0; i < n; i++) {
             if (chunks[i] === '' ||
-                chunks[i].length > 8 ||
+                chunks[i].length > n ||
                 chunks[i].search(/[^kqrbnpKQRNBP1-8]/) !== -1) {
                 return false;
             }
@@ -200,7 +203,7 @@
             // loop through each character in the FEN section
             for (var j = 0; j < row.length; j++) {
                 // number / empty squares
-                if (row[j].search(/[1-n]/) !== -1) {
+                if (row[j].search(/[1-8]/) !== -1) {
                     colIndex += parseInt(row[j], 10);
                 }
                 // piece
@@ -1689,6 +1692,7 @@
             widget.position = function(position, useAnimation) {
                 // no arguments, return the current position
                 if (arguments.length === 0) {
+                    console.log("FAIL1");
                     return deepCopy(CURRENT_POSITION);
                 }
 
@@ -1711,10 +1715,14 @@
                 if (validFen(position) === true) {
                     position = fenToObj(position);
                 }
+                else{
+                    console.log("HOW A VALID FEN");
+                }
 
                 // validate position object
                 if (validPositionObject(position) !== true) {
                     error(6482, 'Invalid value passed to the position method.', position);
+                    console.log("NOT VALID POS OBJECT");
                     return;
                 }
 
@@ -1731,6 +1739,7 @@
                 };
 
                 if (checkGeometriesLoaded() && ANIMATION_HAPPENING === false) {
+                    console.log("doDrawing()");
                     doDrawing(); // normal case
                 } else {
                     // Someone called position() before the geometries finished loading,
