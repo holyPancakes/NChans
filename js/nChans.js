@@ -232,7 +232,8 @@
         backgroundColor: 0xffffff,
         whitePieceColor: 0xb28613,
         onChange: function(oldPos,newPos){
-            $("#changeFEN").text = newPos;
+            console.log(ChessBoard3.objToFen(newPos));
+            document.getElementById("changeFEN").value = ChessBoard3.objToFen(newPos);
         }
     };
     var board1 = new ChessBoard3('board', cfg, 7);
@@ -246,7 +247,6 @@
         if(event.keyCode == 13){
             var source = event.target || event.srcElement;
             board1.position(source.value,true);
-            console.log("test");
         }
     });
 
