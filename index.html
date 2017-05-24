@@ -35,9 +35,6 @@
                 <li>
                     <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Puzzles<i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="demo" class="collapse">
-                        <li>
-                            <a href="">Create Puzzle</a>
-                        </li>
                     </ul>
                 </li>
                 <li>
@@ -105,8 +102,12 @@
                         c += puzzles[i].size;
                     }
 
+                    let ul = $('#demo');
                     for (let i=0; i<puzzles.length; i++) {
                         puzzles[i].solutions = solveNChans(puzzles[i].size, puzzles[i].config);
+
+                        let puzzle = ['<li><a id="puzzle', i, '">Puzzle ', i+1, '</a></li>'].join('');
+                        ul.append(puzzle);
                     }
 
                     console.log(puzzles);
