@@ -109,7 +109,7 @@
 
                     for (let i=0; i<puzzles.length; i++) {
                         puzzles[i].solutions = solveNChans(puzzles[i].size, puzzles[i].config);
-
+                        console.log(puzzles[i].solutions);
                         let puzzle = ['<li><a id="puzzle', i, '">Puzzle ', i+1, '</a></li>'].join('');
                         ul.append(puzzle);
 
@@ -123,6 +123,12 @@
                                 let btn = ['<button type="button" class="btn btn-primary btn-block" id="sol',
                                         j, '">Solution ',j+1,'</button>'].join('');
                                 btns.append(btn);
+
+                                let b = $('#sol'+j);
+
+                                b.click((e) => {
+                                    board1.position(configToFen(puzzles[i].solutions[j]), true);
+                                });
                             }
                         });
 

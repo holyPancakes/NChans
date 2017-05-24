@@ -56,7 +56,7 @@ function configToFen (config) {
     let fen = '';
     let stack = [];
 
-    for (let i=0; i<config.length; i++) {
+    for (let i=0; i<(config.length-1); i++) {
         switch (config[i]) {
             case '1':
                 if (stack.length > 0) {
