@@ -57,7 +57,10 @@
                         </div>
                         <div class="col-lg-2">
                             <div id='test'>
-                                <input type="text" name="fen" id="changeFEN"></input>
+                                <input type="text" name="fen" id="changeFEN" hidden=""></input>
+                            </div>
+                            <div id='buttons'>
+
                             </div>
                         </div>
                         <div id='output'></div>
@@ -105,6 +108,8 @@
                     }
 
                     let ul = $('#demo');
+                    let btns = $('#buttons');
+
                     for (let i=0; i<puzzles.length; i++) {
                         puzzles[i].solutions = solveNChans(puzzles[i].size, puzzles[i].config);
 
@@ -112,16 +117,21 @@
                         ul.append(puzzle);
 
                         let el = $('#puzzle'+i);
-
                         el.click((e) => {
                             board1 = new ChessBoard3('board', cfg, puzzles[i].size);
                             board1.position(configToFen(puzzles[i].config), true);
+                            btns.empty();
+
+                            for(let j=0; j<puzzles[i].solutions.length; j++) {
+                                let btn = ['<button type="button" class="btn btn-primary btn-block" id="sol',
+                                        j, '">Solution ',j+1,'</button>'].join('');
+                                btns.append(btn);
+                            }
                         });
+
                     }
 
                     console.log(puzzles);
-
-                    node.innerText = puzzles;
                 };
 
                 reader.readAsText(input.files[0]);
