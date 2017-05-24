@@ -216,8 +216,11 @@
         return solutions;
     }
 
-
+    //Array of Puzzles from Input and from creating
+    //USING FEN FORMAT
     var puzzles = [];
+    var currentPuzzle = 0;
+
 
     //test
     var cfg = {
@@ -227,12 +230,24 @@
         showNotation: false,
         localStorage: false,
         backgroundColor: 0xffffff,
-        whitePieceColor: 0xb28613
+        whitePieceColor: 0xb28613,
+        onChange: function(oldPos,newPos){
+            $("#changeFEN").text = newPos;
+        }
     };
-    var board1 = new ChessBoard3('board', cfg, 5);
+    var board1 = new ChessBoard3('board', cfg, 7);
 
     function addPuzzle(){
 
     }
+
+    //TEST ON ANIMATING MOVES
+    $("#changeFEN").keydown(function(event){
+        if(event.keyCode == 13){
+            var source = event.target || event.srcElement;
+            board1.position(source.value,true);
+            console.log("test");
+        }
+    });
 
 }) ();
