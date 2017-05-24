@@ -99,6 +99,8 @@
                         }
                         puzzles[i].config = arr.join('\n');
 
+                        board1 = new ChessBoard3('board', cfg, puzzles[i].size);
+                        board1.position(configToFen(puzzles[i].config), true);
                         c += puzzles[i].size;
                     }
 
@@ -108,6 +110,13 @@
 
                         let puzzle = ['<li><a id="puzzle', i, '">Puzzle ', i+1, '</a></li>'].join('');
                         ul.append(puzzle);
+
+                        let el = $('#puzzle'+i);
+
+                        el.click((e) => {
+                            board1 = new ChessBoard3('board', cfg, puzzles[i].size);
+                            board1.position(configToFen(puzzles[i].config), true);
+                        });
                     }
 
                     console.log(puzzles);

@@ -215,7 +215,6 @@ function solveNChans (N, config) {
     return solutions;
 }
 
-(function() {
 
     var puzzles = [];
     var currentPuzzle = 0;
@@ -249,4 +248,3 @@ function solveNChans (N, config) {
         }
     });
 
-}) ();
