@@ -25,10 +25,11 @@
     var SPARE_POSITION = {
         //sw1 : 'wK', sw2: 'wQ', sw3: 'wR', sw4: 'wB', sw5: 'wN', sw6: 'wP',
         //sb1 : 'bK', sb2: 'bQ', sb3: 'bR', sb4: 'bB', sb5: 'bN', sb6: 'bP'
-        sw3: 'wK'
+        sw2: 'wK', sw5: 'wK',
+        sb2: 'wK', sb5: 'wK'
     };
     var ASPECT_RATIO = 600/700;
-    var n = 6;
+    var n;
 
     // ---------------------------------------------------------------------//
     //                               ANIMATION                              //
@@ -263,9 +264,11 @@
     //                           WIDGET DEFINITION                          //
     // ---------------------------------------------------------------------//
 
-    window['ChessBoard3'] = window['ChessBoard3'] || function(containerElOrId, cfg) {
+    window['ChessBoard3'] = window['ChessBoard3'] || function(containerElOrId, cfg, dim) {
 
             cfg = cfg || {};
+
+            n = dim;
 
             var START_POSITION = fenToObj(START_FEN);
 
@@ -321,13 +324,13 @@
             var FILE_A_TEXT_MATERIAL = textMaterial.clone();
             var FILE_H_TEXT_MATERIAL = textMaterial.clone();
 
-            var darkSquareColor = 0x52808D;
+            var darkSquareColor = 0x53B0AE;
             if (cfg.hasOwnProperty('darkSquareColor') && typeof cfg.darkSquareColor === 'number') {
                 darkSquareColor = cfg.darkSquareColor;
             }
             var darkSquareMaterial = new THREE.MeshPhongMaterial({color: new THREE.Color(darkSquareColor)});
 
-            var lightSquareColor= 0x66B99A;
+            var lightSquareColor= 0x759465;
             if (cfg.hasOwnProperty('lightSquareColor') && typeof cfg.lightSquareColor === 'number') {
                 lightSquareColor = cfg.lightSquareColor;
             }
@@ -986,10 +989,10 @@
                     var u = square.charCodeAt(2) - '1'.charCodeAt(0);
                     tx = SQUARE_SIZE * (4 * u - 10) / 3;
                     if (square.charAt(1) == 'w') {
-                        tz = 5 * SQUARE_SIZE;
+                        tz = (n/2+1) * SQUARE_SIZE;
 
                     } else if (square.charAt(1) == 'b') {
-                        tz = -5 * SQUARE_SIZE;
+                        tz = -(n/2+1) * SQUARE_SIZE;
                     }
                 } else if (validOrdinarySquare(square)) {
                     tx = SQUARE_SIZE * (square.charCodeAt(0) - 'a'.charCodeAt(0)) - n/2 * SQUARE_SIZE;

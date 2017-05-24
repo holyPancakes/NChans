@@ -1,19 +1,6 @@
 (function() {
     'use strict';
 
-
-    // ---------------------------------------------------------------------//
-    //                               CONSTANTS                              //
-    // ---------------------------------------------------------------------//
-
-    // ---------------------------------------------------------------------//
-    //                               ANIMATION                              //
-    // ---------------------------------------------------------------------//
-
-    // ---------------------------------------------------------------------//
-    //                               UTILITIES                              //
-    // ---------------------------------------------------------------------//
-
     function getMD(i,j,k,l){
         return parseInt(Math.abs(i-k)+Math.abs(j-l));
     }
@@ -104,6 +91,8 @@
         let solutions = [];
         let nopts = [];
         let option = [];
+        let start, move;
+
 
         let j = 0, i = 0;
         for (i=0;i<(n*n);i++) {
@@ -211,6 +200,7 @@
                         if(i%n==0){
                             // printf("\n");
                             // fprintf(out, "\n");
+                            sol = sol.slice(0,-1);
                             sol += '\n';
                         }
                     }
@@ -225,21 +215,24 @@
 
         return solutions;
     }
-    
+
+
+    var puzzles = [];
+
     //test
     var cfg = {
         draggable: true,
         dropOffBoard: 'trash',
         sparePieces: true,
         showNotation: false,
-        localStorage: false
+        localStorage: false,
+        backgroundColor: 0xffffff,
+        whitePieceColor: 0xb28613
     };
-    var board1 = new ChessBoard3('board', cfg);
+    var board1 = new ChessBoard3('board', cfg, 5);
 
+    function addPuzzle(){
 
-    // ---------------------------------------------------------------------//
-    //                           WIDGET DEFINITION                          //
-    // ---------------------------------------------------------------------//
-
+    }
 
 }) ();
